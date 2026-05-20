@@ -99,10 +99,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // مسارات التقارير اللحظية (تمت إضافتها هنا)
     // مسارات التقارير الديناميكية الجديدة
-    Route::prefix('reports')->name('reports.')->group(function () {
-        Route::get('/inventory', [ReportController::class, 'inventoryReport'])->name('inventory');
-        Route::get('/distributions', [ReportController::class, 'distributionsReport'])->name('distributions');
-    });
+   // مجموعة التقارير اللحظية والديناميكية الموحدة
+Route::prefix('reports')->name('reports.')->group(function () {
+    Route::get('/inventory', [ReportController::class, 'inventoryReport'])->name('inventory');
+    Route::get('/distributions', [ReportController::class, 'distributionsReport'])->name('distributions');
+    Route::get('/warehouses', [ReportController::class, 'warehousesReport'])->name('warehouses');
+    Route::get('/entities', [ReportController::class, 'entitiesReport'])->name('entities');
+});
 
     Route::apiResource('inventory-movements', InventoryMovementController::class)->only(['index', 'show']);
     Route::apiResource('entity-stocks', EntityStockController::class)->only(['index', 'show']);
