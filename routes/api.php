@@ -84,7 +84,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('distributions/deliveries/{distribution}/toggle', [DistributionDeliveryController::class, 'toggleStatus'])->name('distributions.deliveries.toggle');
     // --- مسارات الـ Resources الأساسية للجهات والأفراد ---
     Route::apiResource('allocations', AllocationController::class)->except(['destroy']);
-    Route::apiResource('distributions', DistributionController::class)->except(['destroy']);
+    Route::apiResource('distributions', DistributionController::class);
 
     // ---------------------------------------------------------------------
     // --- 10. نظام الأقساط والعقود ---
@@ -99,8 +99,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // مسارات التقارير اللحظية (تمت إضافتها هنا)
     // مسارات التقارير الديناميكية الجديدة
-   // مجموعة التقارير اللحظية والديناميكية الموحدة
-Route::prefix('reports')->name('reports.')->group(function () {
+   Route::prefix('reports')->name('reports.')->group(function () {
     Route::get('/inventory', [ReportController::class, 'inventoryReport'])->name('inventory');
     Route::get('/distributions', [ReportController::class, 'distributionsReport'])->name('distributions');
     Route::get('/warehouses', [ReportController::class, 'warehousesReport'])->name('warehouses');
